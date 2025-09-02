@@ -26,7 +26,7 @@ const Login = () => {
                                     </label>
                                     <p>Don't have an account ? please
                                         <Link className='text-red-600' to="/register"> register</Link></p>
-                                    <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded mt-4">Login</button>
+                                    <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded mt-4 textarea-md">Login</button>
                                 </fieldset>
                             </div>
                         </div>

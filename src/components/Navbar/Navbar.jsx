@@ -2,6 +2,15 @@ import { NavLink } from 'react-router-dom';
 import logo from '../../assets/logo2.png'
 const Navbar = () => {
     const links = <>
+        <a className='font-medium text-base hover:text-blue-600 mr-5'><NavLink to="/pdashboard" className={({ isActive }) =>
+            `font-medium hover:text-blue-600 transition-colors duration-300 ${isActive ? 'text-blue-600' : ""
+            }`
+        }
+        >Patient Dashboard</NavLink></a>
+        <a className='font-medium text-base hover:text-blue-600 mr-5'><NavLink to="/ddashboard" className={({ isActive }) =>
+            `font-medium hover:text-blue-600 transition-colors duration-300 ${isActive ? 'text-blue-600' : ""
+            }`
+        }>Doctor Dashboard</NavLink></a>
         <a className=' hover:text-blue-600 mr-5'><NavLink
             to="/"
             className={({ isActive }) =>
@@ -16,15 +25,6 @@ const Navbar = () => {
             }`
         }
         >Register</NavLink></a>
-        <a className='font-medium text-base hover:text-blue-600 mr-5'><NavLink to="/booking" className={({ isActive }) =>
-            `font-medium hover:text-blue-600 transition-colors duration-300 ${isActive ? 'text-blue-600' : ""
-            }`
-        }
-        >Patient</NavLink></a>
-        <a className='font-medium text-base hover:text-blue-600 mr-5'><NavLink to="/dashboard" className={({ isActive }) =>
-            `font-medium hover:text-blue-600 transition-colors duration-300 ${isActive ? 'text-blue-600' : ""
-            }`
-        }>Doctor</NavLink></a>
     </>
     return (
         <div className="bg-white sticky top-0 z-50">

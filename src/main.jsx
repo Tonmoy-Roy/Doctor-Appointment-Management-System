@@ -11,6 +11,8 @@ import Root from './components/Root/Root.jsx';
 import Error from './components/Error/Error.jsx';
 import Login from './components/Pages/Login.jsx';
 import Register from './components/Pages/Register.jsx';
+import Pdashboard from './components/Pages/Patient/Pdashboard.jsx';
+import Dashboard from './components/Pages/Doctor/Dashboard.jsx';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/pdashboard",
+        element: <Pdashboard></Pdashboard>,
+      },
+      {
+        path: "/ddashboard",
+        element: <Dashboard></Dashboard>,
       },
     ]
   },
