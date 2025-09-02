@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import axiosInstance from "../../Lib/axiosInstance";
+import PatientAppointments from "./PatientAppointments";
 
 
 const Pdashboard = () => {
@@ -66,7 +67,7 @@ const Pdashboard = () => {
         };
 
         fetchDoctors();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page, specialization, triggerSearch]);
 
 
@@ -166,7 +167,7 @@ const Pdashboard = () => {
                 </button>
             </div>
             <div>
-                <p className="font-semibold text-xl mb-5">My Appointments</p>
+                <PatientAppointments></PatientAppointments>
             </div>
         </div>
     );
