@@ -11,7 +11,7 @@ const Navbar = () => {
         >
             Login
         </NavLink></a>
-        <a className='font-medium text-base hover:text-blue-600 mr-5'><NavLink to="/service" className={({ isActive }) =>
+        <a className='font-medium text-base hover:text-blue-600 mr-5'><NavLink to="/register" className={({ isActive }) =>
             `font-medium hover:text-blue-600 transition-colors duration-300 ${isActive ? 'text-blue-600' : ""
             }`
         }
