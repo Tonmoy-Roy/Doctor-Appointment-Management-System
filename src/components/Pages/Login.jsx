@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axiosInstance from "../Lib/axiosInstance";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -56,28 +57,70 @@ const Login = () => {
 
         try {
             setLoading(true);
-            const response = await axiosInstance.post("/auth/login", formData);
-            const { accessToken } = response.data;
 
-            // ✅ Save token in localStorage (or Zustand/Context later)
-            localStorage.setItem("token", accessToken);
-            localStorage.setItem("role", formData.role);
+            // Send email, password, and role as per API requirement
+            const { email, password, role } = formData;
+            const response = await axiosInstance.post("/auth/login", {
+                email,
+                password,
+                role,
+            });
 
-            alert("Login successful!");
+            console.log("Login API Response:", response.data);
 
-            // ✅ Navigate to role-based dashboard
-            if (formData.role === "PATIENT") {
+            const token =
+                response.data.token ||
+                response.data.accessToken ||
+                response.data.access_token ||
+                response.data.data?.token;
+
+            if (!token) {
+                console.error("Token not found in response:", response.data);
+                throw new Error("No authentication token received.");
+            }
+
+            localStorage.setItem("authToken", token);
+            localStorage.setItem("userRole", role);
+
+            toast.success("Login successful!");
+
+            // Navigate to dashboard
+            if (role === "PATIENT") {
                 navigate("/Pdashboard");
             } else {
                 navigate("/ddashboard");
             }
         } catch (error) {
-            console.error("Login failed:", error);
-            alert("Login failed: " + (error.response?.data?.message || "Try again."));
+            console.error("Login failed:", error.response?.data || error);
+
+            // Extract message from backend response
+            const apiError = error.response?.data;
+            const errorMessage =
+                apiError?.message ||
+                (typeof apiError === "string" ? apiError : "") ||
+                "Login failed. Please try again.";
+ if (apiError?.errors) {
+                const fieldErrors = Object.entries(apiError.errors)
+                    .map(([field, msg]) => `${field}: ${msg}`)
+                    .join(", ");
+                toast.error(`Validation Error: ${fieldErrors}`);
+            } else {
+                toast.error(errorMessage);
+            }
+            // If specific field errors are present
+            if (apiError?.errors) {
+                const fieldErrors = Object.entries(apiError.errors)
+                    .map(([field, msg]) => `${field}: ${msg}`)
+                    .join(", ");
+                toast.error(`Validation Error: ${fieldErrors}`);
+            } else {
+                toast.error(errorMessage);
+            }
         } finally {
             setLoading(false);
         }
     };
+
 
     return (
         <div className="max-w-md mx-auto mt-12 bg-white p-6 rounded shadow">
@@ -130,12 +173,22 @@ const Login = () => {
                 {/* Submit */}
                 <button
                     type="submit"
-                    className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+                    className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 disabled:opacity-50"
                     disabled={loading}
                 >
                     {loading ? "Logging in..." : "Login"}
                 </button>
             </form>
+
+            <p className="mt-4 text-center">
+                Don't have an account?{" "}
+                <button
+                    onClick={() => navigate("/register")}
+                    className="text-blue-600 hover:underline"
+                >
+                    Register here
+                </button>
+            </p>
         </div>
     );
 };

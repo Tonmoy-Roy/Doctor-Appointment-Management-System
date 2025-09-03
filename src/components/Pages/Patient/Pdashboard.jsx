@@ -89,13 +89,13 @@ const Pdashboard = () => {
     return (
         <div className="px-4">
             <p className='text-2xl font-bold mb-6 text-center mt-10'>Doctor List</p>
-            <div className='md:flex justify-center items-center mb-8'>
-                <div className="mr-5 mb-2">
-                    <div className="relative">
+            <div className='md:flex justify-center items-center mb-8 '>
+                <div className="mr-5 mb-2 ">
+                    <div className="relative ">
                         <input
                             name="search"
                             type="text"
-                            className="input w-full max-w-xs pl-10 pr-4 py-2 rounded-xl border-black"
+                            className="input pl-10 pr-4 py-2 rounded-xl border-black"
                             placeholder="Search by doctor name"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
@@ -110,7 +110,7 @@ const Pdashboard = () => {
                     </div>
                 </div>
 
-                <div className="">
+                <div>
                     <select
                         value={specialization}
                         onChange={handleSpecializationChange}
@@ -132,7 +132,7 @@ const Pdashboard = () => {
             {loading ? (
                 <p className="text-center py-10">Loading doctors...</p>
             ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
                     {doctors.map((doctor) => (
                         <div
                             key={doctor._id}
@@ -169,7 +169,7 @@ const Pdashboard = () => {
                 >
                     Previous
                 </button>
-                <span className="self-center font-semibold text-gray-700">Page {page}</span>
+                <span className="self-center">Page {page}</span>
                 <button
                     onClick={handleNext}
                     disabled={!hasMore}

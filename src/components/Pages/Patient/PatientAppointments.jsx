@@ -45,7 +45,7 @@ const PatientAppointments = () => {
             <h2 className="text-2xl font-bold mb-6 text-center">My Appointments</h2>
 
             {/* Status Tabs */}
-            <div className="flex justify-center space-x-4 mb-6">
+            <div className="md:flex justify-center space-x-4 mb-6">
                 {["", "PENDING", "COMPLETED", "CANCELLED"].map((s) => (
                     <button
                         key={s}
@@ -106,18 +106,21 @@ const PatientAppointments = () => {
             )}
 
             {/* Pagination Controls (optional) */}
-            <div className="flex justify-center space-x-4 mt-8">
+            <div className="md:flex justify-center space-x-4 mt-8">
                 <button
                     onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
                     disabled={page === 1}
-                    className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                    className={`px-4 py-2 rounded ${page === 1
+                        ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+                        : "btn bg-gray-300"
+                        }`}
                 >
                     Previous
                 </button>
                 <span className="self-center">Page {page}</span>
                 <button
                     onClick={() => setPage((prev) => prev + 1)}
-                    className="px-4 py-2 bg-gray-300 rounded"
+                    className="px-4 py-2 btn bg-gray-300 rounded"
                 >
                     Next
                 </button>

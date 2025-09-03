@@ -17,10 +17,10 @@ const BookAppointmentModal = ({ doctor, isOpen, onClose }) => {
     setLoading(true);
     try {
       await axiosInstance.post("/appointments", {
-        doctorId: doctor._id,
+        doctorId: doctor.id,
         date: selectedDate,
       });
-      
+
       toast.success("Appointment booked successfully!");
       setTimeout(() => {
         onClose();
@@ -40,7 +40,7 @@ const BookAppointmentModal = ({ doctor, isOpen, onClose }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white p-6 rounded-lg w-full max-w-md">
         <h2 className="text-xl font-bold mb-4">Book Appointment with Dr. {doctor.name}</h2>
-        
+
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 mb-2" htmlFor="date">
@@ -56,7 +56,7 @@ const BookAppointmentModal = ({ doctor, isOpen, onClose }) => {
               required
             />
           </div>
-          
+
           <div className="flex justify-end space-x-3">
             <button
               type="button"
