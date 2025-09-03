@@ -42,7 +42,7 @@ const PatientAppointments = () => {
 
     return (
         <div className="px-4 py-8">
-            <h2 className="text-2xl font-semibold mb-6 text-center">My Appointments</h2>
+            <h2 className="text-2xl font-bold mb-6 text-center">My Appointments</h2>
 
             {/* Status Tabs */}
             <div className="flex justify-center space-x-4 mb-6">
