@@ -12,7 +12,7 @@ It supports patient registration, doctor management, appointment booking, and re
 
 # Installation
 1. Clone the repo
-git clone https://github.com/Tonmoy-Roy/Doctor-Appointment-Management-System.git
+git clone `https://github.com/Tonmoy-Roy/Doctor-Appointment-Management-System.git`
 
 2. Install dependencies
 npm install
