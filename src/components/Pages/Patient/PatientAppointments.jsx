@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axiosInstance from "../../Lib/axiosInstance";
 const PatientAppointments = () => {
     const [appointments, setAppointments] = useState([]);
-    const [status, setStatus] = useState(""); // '', 'PENDING', 'COMPLETED', 'CANCELLED'
+    const [status, setStatus] = useState(""); 
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
 
@@ -34,7 +34,7 @@ const PatientAppointments = () => {
                 status: "CANCELLED",
                 appointment_id: appointmentId,
             });
-            fetchAppointments(); // refresh list
+            fetchAppointments(); 
         } catch (err) {
             console.error("Cancel failed", err);
         }
@@ -44,7 +44,6 @@ const PatientAppointments = () => {
         <div className="px-4 py-8">
             <h2 className="text-2xl font-bold mb-6 text-center">My Appointments</h2>
 
-            {/* Status Tabs */}
             <div className="md:flex justify-center space-x-4 mb-6">
                 {["", "PENDING", "COMPLETED", "CANCELLED"].map((s) => (
                     <button
@@ -63,7 +62,6 @@ const PatientAppointments = () => {
                 ))}
             </div>
 
-            {/* Loading State */}
             {loading ? (
                 <p className="text-center">Loading appointments...</p>
             ) : appointments.length === 0 ? (
@@ -105,7 +103,6 @@ const PatientAppointments = () => {
                 </div>
             )}
 
-            {/* Pagination Controls (optional) */}
             <div className="md:flex justify-center space-x-4 mt-8">
                 <button
                     onClick={() => setPage((prev) => Math.max(prev - 1, 1))}

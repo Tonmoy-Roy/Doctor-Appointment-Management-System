@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import axiosInstance from "../../Lib/axiosInstance";
 import PatientAppointments from "./PatientAppointments";
-import BookAppointmentModal from "./BookAppointmentModal"; // Add this import
+import BookAppointmentModal from "./BookAppointmentModal";
 
 const Pdashboard = () => {
     const [doctors, setDoctors] = useState([]);
@@ -14,7 +14,6 @@ const Pdashboard = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [triggerSearch, setTriggerSearch] = useState(false);
 
-    // Add these state variables for the modal
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedDoctor, setSelectedDoctor] = useState(null);
 
@@ -61,13 +60,11 @@ const Pdashboard = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page, specialization, triggerSearch]);
 
-    // Add this function to handle booking appointment
     const handleBookAppointment = (doctor) => {
         setSelectedDoctor(doctor);
         setIsModalOpen(true);
     };
 
-    // Add this function to close the modal
     const handleCloseModal = () => {
         setIsModalOpen(false);
         setSelectedDoctor(null);
@@ -128,7 +125,6 @@ const Pdashboard = () => {
                 </div>
             </div>
 
-            {/* Doctor Cards */}
             {loading ? (
                 <p className="text-center py-10">Loading doctors...</p>
             ) : (
@@ -145,7 +141,6 @@ const Pdashboard = () => {
                             />
                             <h2 className="text-lg font-bold">{doctor.name}</h2>
                             <p className="text-gray-600">{doctor.specialization}</p>
-                            {/* Update the button to use the handleBookAppointment function */}
                             <button
                                 onClick={() => handleBookAppointment(doctor)}
                                 className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
@@ -157,7 +152,6 @@ const Pdashboard = () => {
                 </div>
             )}
 
-            {/* Pagination Controls */}
             <div className="md:flex justify-center mt-8 space-x-4 mb-10">
                 <button
                     onClick={handlePrevious}
@@ -182,7 +176,6 @@ const Pdashboard = () => {
                 </button>
             </div>
 
-            {/* Add the modal component */}
             {selectedDoctor && (
                 <BookAppointmentModal
                     doctor={selectedDoctor}

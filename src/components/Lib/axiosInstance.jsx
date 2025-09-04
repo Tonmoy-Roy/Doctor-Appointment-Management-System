@@ -1,11 +1,9 @@
 import axios from "axios";
 
-// Create axios instance
 export const axiosInstance = axios.create({
     baseURL: "https://appointment-manager-node.onrender.com/api/v1",
 });
 
-// Add a request interceptor to include the auth token
 axiosInstance.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem("authToken");
@@ -19,7 +17,6 @@ axiosInstance.interceptors.request.use(
     }
 );
 
-// Add a response interceptor to handle token expiration
 axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {

@@ -9,7 +9,7 @@ const Login = () => {
     const [formData, setFormData] = useState({
         email: "",
         password: "",
-        role: "PATIENT", // or DOCTOR
+        role: "PATIENT", 
     });
 
     const [errors, setErrors] = useState({});
@@ -58,7 +58,6 @@ const Login = () => {
         try {
             setLoading(true);
 
-            // Send email, password, and role as per API requirement
             const { email, password, role } = formData;
             const response = await axiosInstance.post("/auth/login", {
                 email,
@@ -84,7 +83,6 @@ const Login = () => {
 
             toast.success("Login successful!");
 
-            // Navigate to dashboard
             if (role === "PATIENT") {
                 navigate("/Pdashboard");
             } else {
@@ -93,7 +91,6 @@ const Login = () => {
         } catch (error) {
             console.error("Login failed:", error.response?.data || error);
 
-            // Extract message from backend response
             const apiError = error.response?.data;
             const errorMessage =
                 apiError?.message ||
@@ -107,7 +104,6 @@ const Login = () => {
             } else {
                 toast.error(errorMessage);
             }
-            // If specific field errors are present
             if (apiError?.errors) {
                 const fieldErrors = Object.entries(apiError.errors)
                     .map(([field, msg]) => `${field}: ${msg}`)
@@ -127,7 +123,6 @@ const Login = () => {
             <h2 className="text-xl font-bold mb-6 text-center">Login</h2>
 
             <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Email */}
                 <div>
                     <input
                         name="email"
@@ -142,7 +137,6 @@ const Login = () => {
                     )}
                 </div>
 
-                {/* Password */}
                 <div>
                     <input
                         name="password"
@@ -157,7 +151,6 @@ const Login = () => {
                     )}
                 </div>
 
-                {/* Role Selection */}
                 <div>
                     <select
                         name="role"
@@ -170,7 +163,6 @@ const Login = () => {
                     </select>
                 </div>
 
-                {/* Submit */}
                 <button
                     type="submit"
                     className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 disabled:opacity-50"

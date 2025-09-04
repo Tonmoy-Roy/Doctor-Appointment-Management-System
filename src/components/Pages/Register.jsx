@@ -1,4 +1,3 @@
-import axiosInstance from "../Lib/axiosInstance";
 import { useState } from "react";
 
 const Register = () => {
@@ -12,7 +11,6 @@ const Register = () => {
     });
     const [errors, setErrors] = useState({});
 
-    // Real-time validation
     const validate = (name, value) => {
         switch (name) {
             case "name":
@@ -33,10 +31,8 @@ const Register = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
 
-        // Update form data
         setFormData((prev) => ({ ...prev, [name]: value }));
 
-        // Validate this field
         setErrors((prev) => ({
             ...prev,
             [name]: validate(name, value),
@@ -58,7 +54,6 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Final validation check
         const newErrors = {};
         for (const key in formData) {
             if (role === "patient" && key === "specialization") continue;
@@ -86,11 +81,7 @@ const Register = () => {
                 payload.specialization = formData.specialization;
             }
 
-            const res = await axiosInstance.post(endpoint, payload);
-
-            // ✅ Success
             alert("Registration successful! You can now log in.");
-            // Or use toast if you have it
         } catch (error) {
             console.error("Registration failed:", error);
             alert("Something went wrong: " + (error?.response?.data?.message || "Try again."));
@@ -102,7 +93,6 @@ const Register = () => {
         <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded shadow">
             <h2 className="text-xl font-bold mb-4 text-center">Register as {role}</h2>
 
-            {/* Tab switch */}
             <div className="flex justify-center mb-6 space-x-4">
                 <button
                     onClick={() => handleRoleChange("patient")}
@@ -121,7 +111,6 @@ const Register = () => {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Name */}
                 <div>
                     <input
                         name="name"
@@ -134,7 +123,6 @@ const Register = () => {
                     {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                 </div>
 
-                {/* Email */}
                 <div>
                     <input
                         name="email"
@@ -149,7 +137,6 @@ const Register = () => {
                     )}
                 </div>
 
-                {/* Password */}
                 <div>
                     <input
                         name="password"
@@ -164,7 +151,6 @@ const Register = () => {
                     )}
                 </div>
 
-                {/* Specialization (only for doctor) */}
                 {role === "doctor" && (
                     <div>
                         <select
@@ -186,7 +172,6 @@ const Register = () => {
                     </div>
                 )}
 
-                {/* Photo URL (optional) */}
                 <div>
                     <input
                         name="photo_url"
