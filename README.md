@@ -1,4 +1,4 @@
-https://lucky-tanuki-2fa1c2.netlify.app/
+https://papaya-selkie-95ce3a.netlify.app/
 
 # 🩺 Doctor Appointment Management System
 
@@ -15,7 +15,3 @@ It supports patient registration, doctor management, appointment booking, and re
 # Installation
 1. Clone the repo
 git clone `https://github.com/Tonmoy-Roy/Doctor-Appointment-Management-System.git`
-
-2. Install dependencie
-   
-npm install
