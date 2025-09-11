@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../../Lib/axiosInstance";
 const PatientAppointments = () => {
     const [appointments, setAppointments] = useState([]);
-    const [status, setStatus] = useState(""); 
+    const [status, setStatus] = useState("");
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
 
@@ -30,11 +30,12 @@ const PatientAppointments = () => {
         if (!confirm) return;
 
         try {
+            console.log("Cancelling appointment ID:", appointmentId);
             await axiosInstance.patch("/appointments/update-status", {
                 status: "CANCELLED",
                 appointment_id: appointmentId,
             });
-            fetchAppointments(); 
+            fetchAppointments();
         } catch (err) {
             console.error("Cancel failed", err);
         }
@@ -91,7 +92,7 @@ const PatientAppointments = () => {
                                 </p>
                                 {appt.status === "PENDING" && (
                                     <button
-                                        onClick={() => handleCancel(appt._id)}
+                                        onClick={() => handleCancel(appt.id)}
                                         className="mt-2 px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
                                     >
                                         Cancel
